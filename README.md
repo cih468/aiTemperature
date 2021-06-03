@@ -4,6 +4,7 @@
 
 ## 시계열 데이터 / LSTM  / Transfer Learning
 
+![대회요약](https://user-images.githubusercontent.com/28820900/120657505-84c17280-c4bf-11eb-8260-f3d07e58a2ef.PNG)
 
 
 ### https://dacon.io/competitions/official/235584/overview/description
