@@ -82,7 +82,7 @@ simple_lstm_model.compile(optimizer='adam', loss='mse')
 
 - Y16 validation 데이터 예측 결과
 
-![predict_Y16](C:\Users\OPGG\Desktop\study\dacon\aiTemperature\image\predict_Y16.PNG)
+![predict_Y16](https://user-images.githubusercontent.com/28820900/120607812-807b6200-c48b-11eb-92c8-af9342ef3acc.PNG)
 
 
 
@@ -110,5 +110,5 @@ finetune_history = simple_lstm_model.fit(
 
 - Y18 데이터 예측 결과
 
-![](C:\Users\OPGG\Desktop\study\dacon\aiTemperature\image\predict_Y18.PNG)
+![predict_Y18](https://user-images.githubusercontent.com/28820900/120607832-84a77f80-c48b-11eb-8903-dae4de4d9b0d.PNG)
 
