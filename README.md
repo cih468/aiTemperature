@@ -57,9 +57,58 @@
 - Y18의 이전 데이터가 너무 적으므로, Y18과 가장 유사한 데이터인 Y16 데이터로 LSTM 모델을 Training
 - 이후 LSTM Layer 는 고정 시킨 후, Y18 로 Dense Layer Fine Tunning 진행
 
+- LSTM 모델 구축
+  - LSTM Layer 1개에 Fully Connected Layer 2개 추가하여 생성
+  - Optimizer 는 adam, loss 는 mse를 사용
+
+```python
+# lstm 모델 구축하기
+simple_lstm_model = tf.keras.models.Sequential([
+  tf.keras.layers.LSTM(128, input_shape=sequence.shape[-2:]),
+
+  tf.keras.layers.Dense(128, activation='relu'),
+
+  tf.keras.layers.Dense(128, activation='relu'),
+  
+  tf.keras.layers.Dense(1)
+
+])
+
+
+simple_lstm_model.compile(optimizer='adam', loss='mse')
+```
 
 
 
+- Y16 validation 데이터 예측 결과
 
-## 
+![predict_Y16](C:\Users\OPGG\Desktop\study\dacon\aiTemperature\image\predict_Y16.PNG)
+
+
+
+## Transfer Learning
+
+- LSTM Layer는 고정시킨 후 , 더 적은 epoch 으로 DNN Layer에 대해서만 fine tunning 진행.
+- fine tunning 은 실제 예측해야 하는 Y18 데이터로 진행
+
+```python
+# LSTM 레이어는 고정
+simple_lstm_model.layers[0].trainable = False
+# fine tuning 할 때 사용할 학습데이터 생성 (Y18)
+finetune_X, finetune_y = convert_to_timeseries(pd.concat([X_train.tail(432), train['Y18'].tail(432)], axis = 1), interval=12)
+
+# LSTM 레이어는 고정 시켜두고, DNN 레이어에 대해서 fine tuning 진행 (Transfer Learning)
+finetune_history = simple_lstm_model.fit(
+            finetune_X, finetune_y,
+            epochs=1,
+            batch_size=10,
+            shuffle=False,
+            verbose = 0)
+```
+
+
+
+- Y18 데이터 예측 결과
+
+![](C:\Users\OPGG\Desktop\study\dacon\aiTemperature\image\predict_Y18.PNG)
 
